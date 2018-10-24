@@ -80,11 +80,10 @@ outModule.init = (finishCb) => {
 /**
  * 加载一个预制体
  * @param prefabPath
- * @param deleteFlag 是否清除预制体，就是会不会在cb之后清除预制体，默认不清除
  * @param successCb
  * @param failCb
  */
-outModule.loadPrefab = (prefabPath, deleteFlag, successCb, failCb) => {
+outModule.loadPrefab = (prefabPath, successCb, failCb) => {
     //看看是否有缓存
     if (prefabSave[prefabPath]) {
         if (successCb) {
@@ -101,11 +100,6 @@ outModule.loadPrefab = (prefabPath, deleteFlag, successCb, failCb) => {
         }
         if (successCb) {
             successCb(prefab);
-        }
-        if (deleteFlag) {
-            //清除所有的依赖资源
-            let depends = cc.loader.getDependsRecursively(prefab);
-            cc.loader.release(depends);
         }
     });
 };

@@ -13,15 +13,17 @@ local.findFuncIndex = function (eventName, func) {
     }
     let i, len;
     for (i = 0, len = local.eventSaveObj[eventName].length; i < len; i++) {
-        if (local.eventSaveObj[eventName][i] === func) {
+        if (local.eventSaveObj[eventName][i].func === func) {
             return i;
         }
     }
     return undefined;
 };
 
+outModule.SELECT_HERO_FINISH = "SELECT_HERO_FINISH";
+
 //同一个函数在一个事件下只能监听一次
-outModule.on = function (eventName, func) {
+outModule.on = function (eventName, func, thisObj) {
     if (!local.eventSaveObj[eventName]) {
         local.eventSaveObj[eventName] = [];
     }
@@ -29,7 +31,10 @@ outModule.on = function (eventName, func) {
     if (local.findFuncIndex(eventName, func)) {
         return;
     }
-    local.eventSaveObj[eventName].push(func);
+    local.eventSaveObj[eventName].push({
+        func: func,
+        thisObj: thisObj
+    });
 };
 
 outModule.off = function (eventName, func) {
@@ -54,8 +59,8 @@ outModule.send = function () {
     for (i = 1, len = arguments.length; i < len; i++) {
         argArr.push(arguments[i]);
     }
-    local.eventSaveObj[eventName].forEach(function (oneFunc) {
-        oneFunc.apply(this, argArr);
+    local.eventSaveObj[eventName].forEach(function (oneFuncObj) {
+        oneFuncObj.func.apply(oneFuncObj.thisObj, argArr);
     });
 };
 

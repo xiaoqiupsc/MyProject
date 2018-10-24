@@ -38,6 +38,14 @@ cc.Class({
 
     },
 
+    onButtonClick: function (name, node, component) {
+        switch (name) {
+            case 'label':
+                cc.director.loadScene('GameScene');
+                break;
+        }
+    },
+
     //预加载Game场景
     preLoadGameScene: function () {
         cc.director.preloadScene('GameScene', function (error) {
@@ -50,13 +58,5 @@ cc.Class({
             this._loadProgress.active = false;
             this._labelNode.active = true;
         }.bind(this));
-    },
-
-    onButtonClick: function (name, node, component) {
-        switch (name) {
-            case 'label':
-                cc.director.loadScene('GameScene');
-                break;
-        }
     }
 });

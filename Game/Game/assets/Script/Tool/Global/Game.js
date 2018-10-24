@@ -22,6 +22,7 @@ window.g_ScrollViewTool = require('ScrollViewTool');
 window.g_LogTool = require('LogTool');
 window.g_SpriteFrameManager = require('SpriteFrameManager');
 window.g_JsonDataTool = require('JsonDataTool');
+window.g_EventManager = require('EventManager');
 
 //主场景相关结点缓存
 window.g_GameScene = {};

@@ -20,6 +20,21 @@ outModule.init = (finishCb) => {
     });
 };
 
+//根据一个key值来获取数据，返回一个数组
+outModule.getDataByKey = (tableName, key, value) => {
+    let table = outModule.getTableByName(tableName);
+    if (table && table.array) {
+        let returnArr = [];
+        table.array.forEach((oneData) => {
+            if (oneData[key] === value) {
+                returnArr.push(oneData);
+            }
+        });
+        return returnArr;
+    }
+    return [];
+};
+
 outModule.getTableByName = (tableName) => {
     return localJsonDataSave[tableName];
 };

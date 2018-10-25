@@ -9,9 +9,9 @@ var outModule = {};
 var local = {};
 
 //缓存己方队伍
-local.soldiers = undefined;
+outModule.soldiers = undefined;
 //缓存敌方队伍
-local.enemies = undefined;
+outModule.enemies = undefined;
 
 //是否自动战斗
 local.isAutomatic = undefined;
@@ -24,12 +24,12 @@ local.isAutomatic = undefined;
  * @param isAutomatic
  */
 outModule.startOneBattle = (component, soldiers, enemies, isAutomatic) => {
-    local.soldiers = soldiers;
-    local.enemies = enemies;
+    outModule.soldiers = soldiers;
+    outModule.enemies = enemies;
     //自动战斗
     local.isAutomatic = isAutomatic;
     //初始化战斗控制器
-    BattleControl.init(local.soldiers, local.enemies, component);
+    BattleControl.init(outModule.soldiers, outModule.enemies, component);
 };
 
 module.exports = outModule;

@@ -18,20 +18,36 @@ outModule.buildOneSkill = (skillId, automaticType) => {
     //技能冷却时间
     this._skillTime = 0;
     //技能发起剩余时间
-    this.skillLeftTime = 0;
+    this.skillSurplusTime = 0;
     //自动技能逻辑
     this._automaticType = automaticType;
     //技能数据
     this._jsonData = g_JsonDataTool.getDataById("_table_head_icon_icon", skillId);
 
+    //是否处于技能施放中
+    this._isInUsing = false;
+    //技能施放剩余时间
+    this.inUsingSurplusTime = 0;
+
     //定时更新函数
-    this.update = function (time) {
+    this.update = function (time, personData) {
         //这边更新技能时间
-        this.skillLeftTime = this.skillLeftTime - time;
+        this.skillSurplusTime = this.skillSurplusTime - time;
+        if (this.inUsingSurplusTime > 0 && this.inUsingSurplusTime <= time) {
+            //默认规定是同时只能吟唱一个技能
+            personData._b_isInUsing = false;
+        }
+        this.inUsingSurplusTime = this.inUsingSurplusTime - time;
         if (this.skillLeftTime <= 0) {
             this.skillLeftTime = 0;
             //判断要不要执行技能
-            if (SkillControl.judgeUseSkill(this)) {
+            if (personData._b_isInControl) {
+                return;
+            }
+            if (personData._b_isInUsing) {
+                return;
+            }
+            if (SkillControl.judgeUseSkill(this, personData)) {
                 this.useSkill();
             }
         }

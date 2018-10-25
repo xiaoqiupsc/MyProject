@@ -8,38 +8,99 @@ var local = {};
 
 //承载定时器
 local.component = undefined;
-
 //己方队员
-local.soilders = undefined;
+local.heroes = undefined;
 //地方
 local.enemies = undefined;
 
+//全局的暂停按钮
+local.pauseFlag = false;
+
 //定时函数
 local.update = () => {
+    if (local.stopFlag) {
+        return;
+    }
     //每个己方英雄技能执行update
-    local.soilders._b_skillArr.forEach(function (oneSkill) {
-        oneSkill.update(g_BATTLE_TIMER_TIME);
+    local.heroes.forEach(function (oneHero) {
+        //英雄执行update
+        oneHero.update(g_BATTLE_TIMER_TIME);
+        oneHero._b_skillArr.forEach(function (oneSkill) {
+            oneSkill.update(g_BATTLE_TIMER_TIME, oneHero);
+        });
     });
     //每个敌方英雄技能执行update
-    local.enemies._b_skillArr.forEach(function (oneSkill) {
-        oneSkill.update(g_BATTLE_TIMER_TIME);
+    local.enemies.forEach(function (oneEnemy) {
+        //地方执行update
+        oneEnemy.update(g_BATTLE_TIMER_TIME);
+        oneEnemy._b_skillArr.forEach(function (oneSkill) {
+            oneSkill.update(g_BATTLE_TIMER_TIME, oneHero);
+        });
     });
 };
 
 //技能控制初始化
-outModule.init = (soilders, enemies, component) => {
+outModule.init = (heroes, enemies, component) => {
     local.component = component;
-    local.soilders = soilders;
+    local.heroes = heroes;
     local.enemies = enemies;
+};
+
+//暂停战斗
+outModule.pause = () => {
+    if (local.pauseFlag) {
+        return;
+    }
+    local.pauseFlag = true;
+    //每个己方英雄技能执行pause
+    local.heroes.forEach(function () {
+        oneSkill.pause();
+    });
+    //每个敌方英雄技能执行pause
+    local.enemies.forEach(function () {
+        oneSkill.pause();
+    });
+};
+
+//取消暂停
+outModule.resume = () => {
+    if (!local.pauseFlag) {
+        return;
+    }
+    local.pauseFlag = false;
+    //每个己方英雄技能执行resume
+    local.heroes.forEach(function () {
+        oneSkill.resume();
+    });
+    //每个敌方英雄技能执行resume
+    local.enemies.forEach(function () {
+        oneSkill.resume();
+    });
 };
 
 //开始计时器
 outModule.start = () => {
     local.component.schedule(local.update, g_BATTLE_TIMER_TIME, cc.macro.REPEAT_FOREVER);
+    //每个己方英雄技能执行start
+    local.heroes.forEach(function () {
+        oneSkill.start();
+    });
+    //每个敌方英雄技能执行start
+    local.enemies.forEach(function () {
+        oneSkill.start();
+    });
 };
 
 outModule.stop = () => {
-
+    local.component.unschedule(local.update);
+    //每个己方英雄技能执行stop
+    local.heroes.forEach(function () {
+        oneSkill.stop();
+    });
+    //每个敌方英雄技能执行stop
+    local.enemies.forEach(function () {
+        oneSkill.stop();
+    });
 };
 
 module.exports = outModule;

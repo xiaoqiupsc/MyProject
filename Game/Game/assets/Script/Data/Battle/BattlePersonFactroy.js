@@ -5,6 +5,7 @@
  */
 
 var SkillFactory = require('SkillFactory');
+var BattleManager = require('BattleManager');
 
 var outModule = {};
 
@@ -17,9 +18,11 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
     person._b_skillArr = [];
     //自动选项
     person._b_automaticType = automaticType;
+    //加入一个普通攻击
+    person._b_skillArr.push(new SkillFactory.buildAttackSkill(person._r_attackSpeed, person._r_moveSpeed));
     //初始化技能
     person._r_skillIdArr.forEach(function (skillId) {
-        this._b_skillArr.push(SkillFactory.buildOneSkill(skillId, person._b_automaticType));
+        this._b_skillArr.push(new SkillFactory.buildOneSkill(skillId, person._b_automaticType));
     }.bind(this));
 
     //是否被控制
@@ -29,6 +32,11 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
 
     //是否处于技能施放中
     person._b_isInUsing = false;
+
+    person._b_hp = person._r_hp;
+    person._b_mp1 = person._r_mp1;
+
+    person._b_node = undefined;
 
     //英雄的更新
     person.update = function (time) {
@@ -85,6 +93,19 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
      */
     person.hurtCb = function (hurtSkill, hurtNumResult, isDead) {
 
+    };
+
+    person.move = function () {
+        let addX = person._r_moveSpeed / 100;
+        if (!person._b_isUserHero) {
+            addX = -1 * addX;
+        }
+        let newX = person._b_node.x + addX;
+        let action = cc.moveTo(g_BATTLE_TIMER_TIME, cc.p(newX, person._b_node.y));
+        //person._b_node.stopAllActions();
+        person._b_node.runAction(cc.sequence(action, cc.callFunc(function () {
+            person._b_node.x = newX;
+        })));
     };
 
     return person;

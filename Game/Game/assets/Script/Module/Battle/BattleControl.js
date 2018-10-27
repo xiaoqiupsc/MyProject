@@ -34,7 +34,7 @@ local.update = () => {
         //地方执行update
         oneEnemy.update(g_BATTLE_TIMER_TIME);
         oneEnemy._b_skillArr.forEach(function (oneSkill) {
-            oneSkill.update(g_BATTLE_TIMER_TIME, oneHero);
+            oneSkill.update(g_BATTLE_TIMER_TIME, oneEnemy);
         });
     });
 };
@@ -53,12 +53,12 @@ outModule.pause = () => {
     }
     local.pauseFlag = true;
     //每个己方英雄技能执行pause
-    local.heroes.forEach(function () {
-        oneSkill.pause();
+    local.heroes.forEach(function (hero) {
+        hero.pause();
     });
     //每个敌方英雄技能执行pause
-    local.enemies.forEach(function () {
-        oneSkill.pause();
+    local.enemies.forEach(function (enemy) {
+        enemy.pause();
     });
 };
 
@@ -69,12 +69,12 @@ outModule.resume = () => {
     }
     local.pauseFlag = false;
     //每个己方英雄技能执行resume
-    local.heroes.forEach(function () {
-        oneSkill.resume();
+    local.heroes.forEach(function (hero) {
+        hero.resume();
     });
     //每个敌方英雄技能执行resume
-    local.enemies.forEach(function () {
-        oneSkill.resume();
+    local.enemies.forEach(function (enemy) {
+        enemy.resume();
     });
 };
 
@@ -82,24 +82,24 @@ outModule.resume = () => {
 outModule.start = () => {
     local.component.schedule(local.update, g_BATTLE_TIMER_TIME, cc.macro.REPEAT_FOREVER);
     //每个己方英雄技能执行start
-    local.heroes.forEach(function () {
-        oneSkill.start();
+    local.heroes.forEach(function (hero) {
+        hero.start();
     });
     //每个敌方英雄技能执行start
-    local.enemies.forEach(function () {
-        oneSkill.start();
+    local.enemies.forEach(function (enemy) {
+        enemy.start();
     });
 };
 
 outModule.stop = () => {
     local.component.unschedule(local.update);
     //每个己方英雄技能执行stop
-    local.heroes.forEach(function () {
-        oneSkill.stop();
+    local.heroes.forEach(function (hero) {
+        hero.stop();
     });
     //每个敌方英雄技能执行stop
-    local.enemies.forEach(function () {
-        oneSkill.stop();
+    local.enemies.forEach(function (enemy) {
+        enemy.stop();
     });
 };
 

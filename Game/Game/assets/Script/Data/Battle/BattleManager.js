@@ -23,11 +23,15 @@ local.isAutomatic = undefined;
  * @param enemies
  * @param isAutomatic
  */
-outModule.startOneBattle = (component, soldiers, enemies, isAutomatic) => {
+outModule.init = (soldiers, enemies, isAutomatic) => {
     outModule.soldiers = soldiers;
     outModule.enemies = enemies;
     //自动战斗
     local.isAutomatic = isAutomatic;
+};
+
+//初始化场景组建
+outModule.startBattle = (component) => {
     //初始化战斗控制器
     BattleControl.init(outModule.soldiers, outModule.enemies, component);
 };

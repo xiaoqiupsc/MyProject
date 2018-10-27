@@ -22,13 +22,7 @@ cc.Class({
         g_GameSceneManager.addNode("Prefab/Battle/HeroSelect", g_GAME_SCENE_UI_NODE, "HeroSelectUI", false, undefined, undefined);
     },
 
-    //结点初始化
-    UIInit: function () {
-
-    },
-
-    //数据初始化
-    dataInit: function () {
+    onShow: function () {
 
     }
 });

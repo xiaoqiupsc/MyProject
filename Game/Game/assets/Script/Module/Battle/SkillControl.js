@@ -18,6 +18,15 @@ local.judgeFuncObj[g_AUTOMATIC_TYPE_OBJ.TYPE_1] = function (skillData, personDat
     } else {
         enemies = BattleManager.soldiers;
     }
+    let attackDis = skillData.dis || personData._r_attackRange;
+    let minDis = 0;
+    enemies.forEach(function (enemy) {
+        let dis = Math.abs(enemy._b_node.x - personData._b_node.x);
+        if (!minDis || minDis > dis) {
+            minDis = dis;
+        }
+    });
+    return attackDis > minDis;
 };
 
 /**

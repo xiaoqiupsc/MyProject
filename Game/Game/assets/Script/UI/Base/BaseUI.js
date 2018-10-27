@@ -33,6 +33,7 @@ cc.Class({
         }
         //初始化
         this.buttonTravelRegister(this.node);
+        this.onShow();
     },
 
     //重新显示的时候会调用这个

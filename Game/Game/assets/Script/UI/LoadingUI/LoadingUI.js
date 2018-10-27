@@ -16,26 +16,20 @@ cc.Class({
         //设置名字
         this._uiName = "LoadingUI";
         this._super();
+    },
+
+    onShow: function () {
+        this._labelNode = this.node.getChildByName('label');
+        this._labelNode.active = false;
+        this._loadProgressNode = this.node.getChildByName('progressBar');
+        this._loadProgressNode.getComponent(cc.ProgressBar).progress = 0;
         //全局初始化
         Game.init(function (num) {
-            this._loadProgress.getComponent(cc.ProgressBar).progress = num;
+            this._loadProgressNode.getComponent(cc.ProgressBar).progress = num;
         }.bind(this), function () {
             //this.node.getChildByName('label').active = true;
             this.preLoadGameScene();
         }.bind(this));
-    },
-
-    //结点初始化
-    UIInit: function () {
-        this._labelNode = this.node.getChildByName('label');
-        this._labelNode.active = false;
-        this._loadProgress = this.node.getChildByName('progressBar');
-        this._loadProgress.getComponent(cc.ProgressBar).progress = 0;
-    },
-
-    //数据初始化
-    dataInit: function () {
-
     },
 
     onButtonClick: function (name, node, component) {
@@ -55,7 +49,7 @@ cc.Class({
                 return;
             }
             //显示文本，用户点击就可以切换
-            this._loadProgress.active = false;
+            this._loadProgressNode.active = false;
             this._labelNode.active = true;
         }.bind(this));
     }

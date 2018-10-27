@@ -3,6 +3,9 @@
  * 本游戏的主场景，现在只有一个场景
  */
 var BaseUI = require("BaseUI");
+var BattleManager = require("BattleManager");
+var BasePersonFactory = require("BasePersonFactory");
+var BattlePersonFactroy = require("BattlePersonFactroy");
 cc.Class({
     extends: BaseUI,
 
@@ -18,7 +21,7 @@ cc.Class({
         //选中的英雄
         _selectHero_1: null,
         _selectHero_2: null,
-        _selectHero_3: null,
+        _selectHero_3: null
     },
 
     onLoad() {
@@ -32,19 +35,9 @@ cc.Class({
 
     onShow: function () {
         this._super();
-    },
-
-    //结点初始化
-    UIInit: function () {
-        this._super();
         this._selectButton_1 = this._midNode.getChildByName('button_1');
         this._selectButton_2 = this._midNode.getChildByName('button_2');
         this._selectButton_3 = this._midNode.getChildByName('button_3');
-    },
-
-    //数据初始化
-    dataInit: function () {
-        this._super();
     },
 
     onButtonClick: function (name, node, component) {
@@ -63,6 +56,23 @@ cc.Class({
                 break;
             case 'buttonStart':
                 //开始战斗
+                this.node.active = false;
+                //加入战斗控制器
+                var enemy_1 = BattlePersonFactroy.buildBattlePerson(new BasePersonFactory.createOneBasePerson(4), 1, undefined, false);
+                var enemy_2 = BattlePersonFactroy.buildBattlePerson(new BasePersonFactory.createOneBasePerson(4), 2, undefined, false);
+                var enemy_3 = BattlePersonFactroy.buildBattlePerson(new BasePersonFactory.createOneBasePerson(4), 3, undefined, false);
+                var soldiers = [];
+                if (this._selectHero_1) {
+                    soldiers.push(BattlePersonFactroy.buildBattlePerson(this._selectHero_1, 1, undefined, true));
+                }
+                if (this._selectHero_2) {
+                    soldiers.push(BattlePersonFactroy.buildBattlePerson(this._selectHero_2, 2, undefined, true));
+                }
+                if (this._selectHero_3) {
+                    soldiers.push(BattlePersonFactroy.buildBattlePerson(this._selectHero_3, 3, undefined, true));
+                }
+                BattleManager.init(soldiers, [enemy_1, enemy_2, enemy_3], true);
+                g_GameSceneManager.addNode("Prefab/Battle/BattleScene", g_GAME_SCENE_UI_NODE, "BattleSceneUI", false, undefined, undefined);
                 break;
         }
     },
@@ -70,18 +80,21 @@ cc.Class({
     selectHeroFinishCb: function (heroData) {
         switch (this._nowSelectPos) {
             case 1:
-                this._selectButton_1.getChildByName('Label').getComponent(cc.Label).string = heroData.unitName;
+                this._selectButton_1.getChildByName('Label').getComponent(cc.Label).string = heroData._r_unitName;
+                this._selectHero_1 = heroData;
                 break;
             case 2:
-                this._selectButton_2.getChildByName('Label').getComponent(cc.Label).string = heroData.unitName;
+                this._selectButton_2.getChildByName('Label').getComponent(cc.Label).string = heroData._r_unitName;
+                this._selectHero_2 = heroData;
                 break;
             case 3:
-                this._selectButton_3.getChildByName('Label').getComponent(cc.Label).string = heroData.unitName;
+                this._selectButton_3.getChildByName('Label').getComponent(cc.Label).string = heroData._r_unitName;
+                this._selectHero_3 = heroData;
                 break;
         }
     },
 
     showSelectHeroListUI: function () {
         g_GameSceneManager.addNode("Prefab/Battle/HeroSelectList", g_GAME_SCENE_UI_NODE, "HeroSelectListUI", false, undefined, undefined);
-    },
+    }
 });

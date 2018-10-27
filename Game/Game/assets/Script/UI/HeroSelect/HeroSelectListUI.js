@@ -4,12 +4,13 @@
  */
 var BaseUI = require("BaseUI");
 var ScrollViewTool = require("ScrollViewTool");
+var BasePersonFactory = require("BasePersonFactory");
 cc.Class({
     extends: BaseUI,
 
     properties: {
         _scrollviewNode: null,
-        _allHeroData: null,
+        _allHeroData: null
     },
 
     onLoad() {
@@ -17,31 +18,16 @@ cc.Class({
         this._uiName = "HeroSelectListUI";
         //初始化
         this._super();
-        this.showUI();
     },
 
     onShow: function () {
         this._super();
-        this.showUI();
-    },
-
-    //结点初始化
-    UIInit: function () {
-        this._super();
         this._scrollviewNode = this._midNode.getChildByName('scrollview');
-    },
-
-    //数据初始化
-    dataInit: function () {
-        this._super();
-        this._allHeroData = g_JsonDataTool.getDataByKey('_table_hero_hero', 'unitType', 2);
-    },
-
-    showUI: function () {
+        this._allHeroData = g_JsonDataTool.getDataByKey('_table_unit_unit', 'unitType', 2);
         ScrollViewTool.buildScrollView(this._scrollviewNode, ScrollViewTool.SCROLL_TYPE_VERTICAL,
             cc.find('view/content/button', this._scrollviewNode), function (childNode, oneHeroData) {
                 childNode.getChildByName('Label').getComponent(cc.Label).string = oneHeroData.unitName;
-                childNode._g_heroData = oneHeroData;
+                childNode._g_heroData = new BasePersonFactory.createOneBasePerson(oneHeroData.main_id);
             }.bind(this), this._allHeroData);
         this.buttonTravelRegister(this._scrollviewNode);
     },
@@ -55,5 +41,5 @@ cc.Class({
                 }
                 break;
         }
-    },
+    }
 });

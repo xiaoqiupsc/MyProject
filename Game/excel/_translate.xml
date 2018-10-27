@@ -1,6 +1,8 @@
 ﻿<note>
-	<file oldName="hero" newName="hero">
-		<table oldName="英雄" newName="hero" use="client"/>
-		<table oldName="职业" newName="job" use="client"/>
+	<file oldName="attribute" newName="attribute">
+		<table oldName="属性模板" newName="attribute" use="client"/>
+	</file>
+	<file oldName="unit" newName="unit">
+		<table oldName="unit" newName="unit" use="client"/>
 	</file>
 </note>

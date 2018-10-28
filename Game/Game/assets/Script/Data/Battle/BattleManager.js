@@ -33,7 +33,29 @@ outModule.init = (soldiers, enemies, isAutomatic) => {
 //初始化场景组建
 outModule.startBattle = (component) => {
     //初始化战斗控制器
-    BattleControl.init(outModule.soldiers, outModule.enemies, component);
+    BattleControl.init(component);
+    BattleControl.updateData(outModule.soldiers, outModule.enemies);
+};
+
+//清除死亡角色
+outModule.clearDead = () => {
+    let soldiers = [], enemies = [];
+    outModule.soldiers.forEach(function (soldier) {
+        if (!soldier._b_isDead) {
+            soldiers.push(soldier);
+        }
+    });
+    outModule.enemies.forEach(function (enemy) {
+        if (!enemy._b_isDead) {
+            enemies.push(enemy);
+        }
+    });
+    outModule.soldiers = soldiers;
+    outModule.enemies = enemies;
+    BattleControl.updateData(outModule.soldiers, outModule.enemies);
+    if (outModule.soldiers.length === 0 || outModule.enemies.length === 0) {
+        BattleControl.stop();
+    }
 };
 
 module.exports = outModule;

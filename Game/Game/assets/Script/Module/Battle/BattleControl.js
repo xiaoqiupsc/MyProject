@@ -18,7 +18,7 @@ local.pauseFlag = false;
 
 //定时函数
 local.update = () => {
-    if (local.stopFlag) {
+    if (local.pauseFlag) {
         return;
     }
     //每个己方英雄技能执行update
@@ -40,8 +40,11 @@ local.update = () => {
 };
 
 //技能控制初始化
-outModule.init = (heroes, enemies, component) => {
+outModule.init = (component) => {
     local.component = component;
+};
+
+outModule.updateData = (heroes, enemies) => {
     local.heroes = heroes;
     local.enemies = enemies;
 };

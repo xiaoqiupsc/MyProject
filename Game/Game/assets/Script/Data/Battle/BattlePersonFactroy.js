@@ -38,6 +38,8 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
 
     person._b_node = undefined;
 
+    person._b_isDead = false;
+
     //英雄的更新
     person.update = function (time) {
         if (person._b_controSurpluslTime === 0) {
@@ -69,22 +71,28 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
     /**
      * 英雄受伤回调
      * @param {*} hurtSkill 造成伤害的技能
+     * @param {*} hurtNumResult 造成的伤害
      * @param {*} hurtFromPerson 造成伤害的来源
      */
-    person.beHurtCb = function (hurtSkill, hurtFromPerson) {
-        let hurtNumResult = 0;
-        person.hp = person.hp - hurtNumResult;
-        if (person.hp <= 0) {
+    person.beHurtCb = function (hurtSkill, hurtNumResult, hurtFromPerson) {
+        let oldHp = person._b_hp;
+        person._b_hp = person._b_hp - hurtNumResult;
+        person._b_node.getChildByName('Hp').getComponent(cc.Label).string = `${person._b_hp}/${person._r_hp}`;
+        if (person._b_hp <= 0 && oldHp > 0) {
             person.beDeadCb(hurtFromPerson);
         }
-        hurtFromPerson.hurtCb(hurtSkill, hurtNumResult, person.hp <= 0);
+        hurtFromPerson.hurtCb(hurtSkill, hurtNumResult, person._b_hp <= 0 && oldHp > 0);
     };
 
     /**
      * 死亡回调
      */
     person.beDeadCb = function (hurtFromPerson) {
-
+        //删除结点
+        person._b_isDead = true;
+        person._b_node.active = false;
+        g_LogTool.showLog(`${hurtFromPerson._r_unitName}击杀${person._r_unitName}`);
+        BattleManager.clearDead();
     };
 
     /**
@@ -96,6 +104,9 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
     };
 
     person.move = function () {
+        if (person._b_node.getChildByName('Role').getComponent(sp.Skeleton).animation !== "run_1") {
+            person._b_node.getChildByName('Role').getComponent(sp.Skeleton).animation = "run_1";
+        }
         let addX = person._r_moveSpeed / 100;
         if (!person._b_isUserHero) {
             addX = -1 * addX;

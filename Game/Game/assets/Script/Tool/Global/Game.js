@@ -37,6 +37,14 @@ window.g_AUTOMATIC_TYPE_OBJ.TYPE_1 = "TYPE_1";
 //战斗场景的定时器间隔
 window.g_BATTLE_TIMER_TIME = 0.01;
 
+//物理攻击
+window.g_ATTACK_TYPE_PHY = 1;
+//魔法攻击
+window.g_ATTACK_TYPE_MAGIC = 2;
+
+window.g_HURT_RESULT_MISS = 1;
+window.g_HURT_RESULT_STRIKE = 2;
+
 var outModule = {};
 
 outModule.init = function (oneTaskFinishCb, finishCb) {

@@ -94,6 +94,12 @@ cc.Class({
             case 'followBtn':
                 this._followNode = node.parent;
                 break;
+            case 'pause':
+                BattleControl.pause();
+                break;
+            case 'resume':
+                BattleControl.resume();
+                break;
         }
     }
 });

@@ -20,13 +20,18 @@ local.judgeFuncObj[g_AUTOMATIC_TYPE_OBJ.TYPE_1] = function (skillData, personDat
     }
     let attackDis = skillData.dis || personData._r_attackRange;
     let minDis = 0;
+    let attackPersonData = undefined;
     enemies.forEach(function (enemy) {
         let dis = Math.abs(enemy._b_node.x - personData._b_node.x);
         if (!minDis || minDis > dis) {
             minDis = dis;
+            attackPersonData = enemy;
         }
     });
-    return attackDis > minDis;
+    if (attackDis >= minDis) {
+        return attackPersonData;
+    }
+    return false;
 };
 
 /**

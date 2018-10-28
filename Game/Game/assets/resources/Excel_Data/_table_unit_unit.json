@@ -19,7 +19,7 @@
             "nature" : 4,
             "icon" : 2,
             "unitRes" : 12,
-            "mainSkillId" : "<12,112,12,12,122>",
+            "mainSkillId" : "<1,1,2,1,1,3,1,1,4>",
             "attackId" : 100,
             "attackList" : 50,
             "attackRange" : 1
@@ -71,7 +71,7 @@
             "nature" : 4,
             "icon" : 2,
             "unitRes" : 12,
-            "mainSkillId" : "<12,112,12,12,122>",
+            "mainSkillId" : "<1,1,2,1,1,3,1,1,4>",
             "attackId" : 100,
             "attackList" : 50,
             "attackRange" : 1

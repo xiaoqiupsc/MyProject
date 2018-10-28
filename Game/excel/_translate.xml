@@ -1,15 +1,14 @@
 <note>
 	<file oldName="attribute" newName="attribute">
-		<table oldName="ÊôÐÔÄ£°å" newName="attribute" use="client"/>
+		<table oldName="å±žæ€§æ¨¡æ¿" newName="attribute" use="client"/>
 	</file>
 	<file oldName="unit" newName="unit">
 		<table oldName="unit" newName="unit" use="client"/>
 	</file>
 	<file oldName="skill" newName="skill">
-		<table oldName="¼¼ÄÜ" newName="unit" use="client"/>
+		<table oldName="æŠ€èƒ½" newName="skill" use="client"/>
 	</file>
 	<file oldName="skill_process" newName="skill_process">
-		<table oldName="¼¼ÄÜ¹ý³Ì" newName="unit" use="client"/>
+		<table oldName="æŠ€èƒ½è¿‡ç¨‹" newName="skill_process" use="client"/>
 	</file>
-
 </note>

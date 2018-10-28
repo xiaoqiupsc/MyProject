@@ -1,0 +1,127 @@
+{
+    "object" : {
+        "1" : {
+            "spName" : "吕布普攻",
+            "time" : 200,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "attack_1",
+            "effect" : 1,
+            "hiteffect" : 100,
+            "hitsound" : 1
+        },    
+        "2" : {
+            "spName" : "三段斩",
+            "time" : 1167,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "skill_1_1",
+            "effect" : 1,
+            "hiteffect" : 100,
+            "hitsound" : 3
+        },    
+        "3" : {
+            "spName" : "血气吸收",
+            "time" : 1400,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "skill_3",
+            "effect" : 8,
+            "hiteffect" : 100,
+            "hitsound" : 5
+        },    
+        "4" : {
+            "spName" : "怒气爆发",
+            "time" : 1433,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 10,
+            "animation" : "skill_1_2",
+            "effect" : 8,
+            "hiteffect" : 100,
+            "hitsound" : 5
+        },    
+        "5" : {
+        },    
+        "6" : {
+        },    
+        "7" : {
+        },    
+        "8" : {
+        }    
+    },
+
+    "array" : [
+        {
+            "main_id" : 1,
+            "spName" : "吕布普攻",
+            "time" : 200,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "attack_1",
+            "effect" : 1,
+            "hiteffect" : 100,
+            "hitsound" : 1
+        },    
+        {
+            "main_id" : 2,
+            "spName" : "三段斩",
+            "time" : 1167,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "skill_1_1",
+            "effect" : 1,
+            "hiteffect" : 100,
+            "hitsound" : 3
+        },    
+        {
+            "main_id" : 3,
+            "spName" : "血气吸收",
+            "time" : 1400,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 3,
+            "animation" : "skill_3",
+            "effect" : 8,
+            "hiteffect" : 100,
+            "hitsound" : 5
+        },    
+        {
+            "main_id" : 4,
+            "spName" : "怒气爆发",
+            "time" : 1433,
+            "type" : 0,
+            "attacktarget" : 1,
+            "range" : "100,200",
+            "Aoelimit" : 10,
+            "animation" : "skill_1_2",
+            "effect" : 8,
+            "hiteffect" : 100,
+            "hitsound" : 5
+        },    
+        {
+            "main_id" : 5
+        },    
+        {
+            "main_id" : 6
+        },    
+        {
+            "main_id" : 7
+        },    
+        {
+            "main_id" : 8
+        }    
+    ]
+}

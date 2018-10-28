@@ -1,0 +1,117 @@
+{
+    "object" : {
+        "1" : {
+            "skName" : "普攻",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 1,
+            "skProcess" : 1,
+            "skIcon" : 100,
+            "damageRate" : 0
+        },    
+        "2" : {
+            "skName" : "三段斩",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 1,
+            "skProcess" : 2,
+            "skIcon" : 200,
+            "damageRate" : 5
+        },    
+        "3" : {
+            "skName" : "血气吸收",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 8,
+            "skProcess" : 3,
+            "skIcon" : 250,
+            "damageRate" : 10,
+            "costMp" : 1
+        },    
+        "4" : {
+            "skName" : "怒气爆发",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 8,
+            "skProcess" : 4,
+            "skIcon" : 300,
+            "damageRate" : 10,
+            "costMp" : 1
+        },    
+        "5" : {
+        },    
+        "6" : {
+        },    
+        "7" : {
+        },    
+        "8" : {
+        },    
+        "9" : {
+        },    
+        "10" : {
+        }    
+    },
+
+    "array" : [
+        {
+            "main_id" : 1,
+            "skName" : "普攻",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 1,
+            "skProcess" : 1,
+            "skIcon" : 100,
+            "damageRate" : 0
+        },    
+        {
+            "main_id" : 2,
+            "skName" : "三段斩",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 1,
+            "skProcess" : 2,
+            "skIcon" : 200,
+            "damageRate" : 5
+        },    
+        {
+            "main_id" : 3,
+            "skName" : "血气吸收",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 8,
+            "skProcess" : 3,
+            "skIcon" : 250,
+            "damageRate" : 10,
+            "costMp" : 1
+        },    
+        {
+            "main_id" : 4,
+            "skName" : "怒气爆发",
+            "sktype" : 1,
+            "sktarget" : 1,
+            "DamageType" : 8,
+            "skProcess" : 4,
+            "skIcon" : 300,
+            "damageRate" : 10,
+            "costMp" : 1
+        },    
+        {
+            "main_id" : 5
+        },    
+        {
+            "main_id" : 6
+        },    
+        {
+            "main_id" : 7
+        },    
+        {
+            "main_id" : 8
+        },    
+        {
+            "main_id" : 9
+        },    
+        {
+            "main_id" : 10
+        }    
+    ]
+}

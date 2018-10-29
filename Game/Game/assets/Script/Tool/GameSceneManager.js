@@ -55,6 +55,15 @@ outModule.addNode = (prefabPath, parentNodeType, nodeName, addMoreFlag, successC
                 successCb();
             }
             return;
+        } else {
+            //直接复制一个
+            let newNode = cc.instantiate(node);
+            newNode.name = nodeName;
+            parentNode.addChild(newNode);
+            if (successCb) {
+                successCb();
+            }
+            return;
         }
     }
     //判断有没有这个结点
@@ -62,14 +71,6 @@ outModule.addNode = (prefabPath, parentNodeType, nodeName, addMoreFlag, successC
         var node = cc.instantiate(prefab);
         node.name = nodeName;
         parentNode.addChild(node);
-        //判断有没有onShow函数
-        if (node._components) {
-            node._components.forEach(function (oneComponent) {
-                if (oneComponent && oneComponent.onShow) {
-                    oneComponent.onShow();
-                }
-            });
-        }
         if (successCb) {
             successCb();
         }

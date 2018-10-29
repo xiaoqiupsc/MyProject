@@ -35,7 +35,11 @@ outModule.init = (finishCb) => {
                 INTI_DATA_KEY[oneUrl].forEach((keyName) => {
                     localJsonDataSave[oneUrl][keyName] = {};
                     localJsonDataSave[oneUrl].array.forEach((oneData) => {
-                        localJsonDataSave[oneUrl][keyName][oneData[keyName]] = oneData;
+                        //不是以id为key的情况时可能包括多个
+                        if (!localJsonDataSave[oneUrl][keyName][oneData[keyName]]) {
+                            localJsonDataSave[oneUrl][keyName][oneData[keyName]] = [];
+                        }
+                        localJsonDataSave[oneUrl][keyName][oneData[keyName]].push(oneData);
                     });
                 });
             }

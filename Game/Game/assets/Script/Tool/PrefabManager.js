@@ -21,6 +21,7 @@ outModule.getPrefab = (path) => {
 };
 
 //清除所有的预制体
+//没有绝对的把握不能使用，清除所有的依赖引用有可能会导致现有的其他界面出错
 outModule.clearAll = () => {
     let key;
     for (key in prefabSave) {
@@ -34,6 +35,7 @@ outModule.clearAll = () => {
 };
 
 //清除制定预制体
+//没有绝对的把握不能使用，清除所有的依赖引用有可能会导致现有的其他界面出错
 outModule.clearPrefab = (prefabPath) => {
     if (!prefabSave[prefabPath]) {
         return;
@@ -44,7 +46,8 @@ outModule.clearPrefab = (prefabPath) => {
 
 /**
  * 加载初始化需要的预制体
- * @param cb
+ * PREFAB_INIT_LOAD_ARR所有这边标记的预制件都会被预先加载起来
+ * @param finishCb
  */
 outModule.init = (finishCb) => {
     var loadedCount = 0;
@@ -98,6 +101,7 @@ outModule.loadPrefab = (prefabPath, successCb, failCb) => {
             }
             return;
         }
+        prefabSave[prefabPath] = prefab;
         if (successCb) {
             successCb(prefab);
         }

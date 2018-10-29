@@ -25,35 +25,12 @@ cc.Class({
         this._rightNode = this.node.getChildByName('Right');
         this._bottomNode = this.node.getChildByName('Bottom');
         this._midNode = this.node.getChildByName('Mid');
-        if ((typeof this.UIInit) === 'function') {
-            this.UIInit();
-        }
-        if ((typeof this.dataInit) === 'function') {
-            this.dataInit();
-        }
         //初始化
         this.buttonTravelRegister(this.node);
-        this.onShow();
     },
 
     //重新显示的时候会调用这个
     onShow: function () {
-
-    },
-
-    /**
-     * 数据初始化
-     * @constructor
-     */
-    dataInit: function () {
-
-    },
-
-    /**
-     * UI初始化
-     * @constructor
-     */
-    UIInit: function () {
 
     },
 

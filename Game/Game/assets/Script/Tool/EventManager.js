@@ -4,9 +4,14 @@
 var outModule = {};
 var local = {};
 
+//存储事件数据
 local.eventSaveObj = {};
 
-//查找一个回调函数所处的index
+/**
+ * 查找一个回调函数所处的index
+ * @param {String} eventName 
+ * @param {Function} func 
+ */
 local.findFuncIndex = function (eventName, func) {
     if (!local.eventSaveObj[eventName]) {
         return undefined;
@@ -20,9 +25,15 @@ local.findFuncIndex = function (eventName, func) {
     return undefined;
 };
 
-outModule.SELECT_HERO_FINISH = "SELECT_HERO_FINISH";
+//函数名需要在这边注册，方便查阅
+outModule.SELECT_HERO_FINISH = "SELECT_HERO_FINISH";//英雄选择完成
 
-//同一个函数在一个事件下只能监听一次
+/**
+ * 同一个函数在一个事件下只能监听一次
+ * @param {String} eventName 
+ * @param {Function} func 
+ * @param {Object} thisObj this，记录了当前调用的作用域
+ */
 outModule.on = function (eventName, func, thisObj) {
     if (!local.eventSaveObj[eventName]) {
         local.eventSaveObj[eventName] = [];
@@ -37,6 +48,12 @@ outModule.on = function (eventName, func, thisObj) {
     });
 };
 
+/**
+ * 取消监听
+ * @param {String} eventName 事件名称
+ * @param {Function} func 函数指针，可以通过函数指针判定一个函数是否相等
+ * 默认一个事件下的一个函数只能被注册一次
+ */
 outModule.off = function (eventName, func) {
     if (!local.eventSaveObj[eventName]) {
         return;
@@ -60,7 +77,16 @@ outModule.send = function () {
         argArr.push(arguments[i]);
     }
     local.eventSaveObj[eventName].forEach(function (oneFuncObj) {
-        oneFuncObj.func.apply(oneFuncObj.thisObj, argArr);
+        //本地的时候需要调用try
+        if (cc.sys.isNative) {
+            try {
+                oneFuncObj.func.apply(oneFuncObj.thisObj, argArr);
+            } catch (e) {
+
+            }
+        } else {
+            oneFuncObj.func.apply(oneFuncObj.thisObj, argArr);
+        }
     });
 };
 

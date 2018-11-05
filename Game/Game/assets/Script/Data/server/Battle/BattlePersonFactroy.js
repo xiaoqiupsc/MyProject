@@ -13,7 +13,7 @@ outModule.buildBattlePerson = (person, pos, automaticType, isUserHero) => {
     //是否是玩家英雄
     person._b_isUserHero = isUserHero;
     //位置
-    person.b_pos = pos;
+    person._b_pos = pos;
     //技能
     person._b_skillArr = [];
     //自动选项
